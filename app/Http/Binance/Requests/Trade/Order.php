@@ -1,13 +1,18 @@
 <?php
 
-namespace App\Http\Binance\Requests;
+namespace App\Http\Binance\Requests\Trade;
 
 use App\Http\Binance\AbstractRequest;
-use App\Http\Binance\RequestInterface;
 
-class Order extends AbstractRequest implements RequestInterface
+/**
+ * Class Order
+ * Place an order for a symbol.
+ *
+ * @package App\Http\Binance\Requests
+ */
+class Order extends AbstractRequest
 {
-    public const ENDPOINT = '/api/v3/order/test';
+    public const ENDPOINT = '/api/v3/order';
     public const METHOD = 'POST';
 
     /**
@@ -30,6 +35,8 @@ class Order extends AbstractRequest implements RequestInterface
         string $price,
         string $newClientOrderId
     ) {
+        throw new \Exception('Are you sure? Maybe just some ore testing with OrderTest class instead...');
+
         parent::__construct();
 
         $this->addQueryParams([
