@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Scheduled\MarketInfo;
 
+use App\Console\Commands\BinanceCommand;
 use App\Http\Binance\Requests\Market\ExchangeInfo as ExchangeInfoRequest;
 use App\Models\Symbol;
 

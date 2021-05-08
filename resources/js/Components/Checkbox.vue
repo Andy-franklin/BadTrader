@@ -1,5 +1,5 @@
 <template>
-    <input type="checkbox" :value="value" v-model="proxyChecked"
+    <input type="checkbox" :value="value" v-model="proxyChecked" :disabled="disabled"
            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 </template>
 
@@ -8,6 +8,10 @@ export default {
     emits: ['update:checked'],
 
     props: {
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
         checked: {
             type: [Array, Boolean],
             default: false,

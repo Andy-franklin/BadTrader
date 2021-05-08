@@ -24,7 +24,24 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        /**
+         * Exchange info:
+         * List of assets and their trading status
+         */
+         $schedule
+             ->command('binance:exchange-info')
+             ->daily()
+             ->runInBackground();
+
+        /**
+         * Price List:
+         * Current price of a trading asset
+         */
+         $schedule
+             ->command('binance:price-list')
+             ->everyMinute()
+             ->withoutOverlapping()
+             ->runInBackground();
     }
 
     /**

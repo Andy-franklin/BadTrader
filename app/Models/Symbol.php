@@ -26,4 +26,17 @@ class Symbol extends Model
     {
         return $this->hasMany(SymbolPrice::class);
     }
+
+    public function userSymbols(): HasMany
+    {
+        return $this->hasMany(UserSymbol::class);
+    }
+
+    public static function systemEnabledSymbols()
+    {
+        return self::query()
+            ->select(['id', 'symbol as symbolName', 'baseAsset', 'quoteAsset', 'isSpotTradingAllowed', 'isMarginTradingAllowed'])
+            ->where('enabled', true)
+            ->get();
+    }
 }

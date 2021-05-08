@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserSymbolController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,8 +25,30 @@ Route::get('/', function () {
     ]);
 });
 
+Route::group([
+    'middleware' => ['auth', 'verified'],
+    'prefix' => 'dashboard',
+    'as' => 'dashboard.'
+], function () {
+
+    Route::group([
+        'middleware' => ['auth', 'verified'],
+        'prefix' => 'options',
+        'as' => 'options.'
+    ], function () {
+        Route::get('/', [UserSymbolController::class, 'index'])->name('index');
+        Route::post('/{symbol}/update', [UserSymbolController::class, 'createOrUpdate'])->name('update');
+    });
+});
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
 
 require __DIR__.'/auth.php';
